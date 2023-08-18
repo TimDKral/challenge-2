@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 @Repository
 @Service
-@Qualifier("ItemRepository")
-public class ItemRepository implements ItemRepositoryInterface {
+@Qualifier("ItemRepositoryMock")
+public class ItemRepositoryMock implements ItemRepositoryInterface {
     // You can add custom methods or override existing methods specific to this repository if needed
     // Spring Data JPA already provides the basic CRUD methods
 }
