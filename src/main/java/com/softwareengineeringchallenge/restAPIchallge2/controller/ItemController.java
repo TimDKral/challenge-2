@@ -3,20 +3,22 @@ package com.softwareengineeringchallenge.restAPIchallge2.controller;
 //local
 import com.softwareengineeringchallenge.restAPIchallge2.dto.ItemDto;
 import com.softwareengineeringchallenge.restAPIchallge2.service.ItemService;
+import com.softwareengineeringchallenge.restAPIchallge2.service.ItemServiceImpl;
 
 //imported
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 @RestController
 @RequestMapping("/items")
 public class ItemController {
 
-    private final ItemService itemService;
+    private final ItemServiceImpl itemService;
 
     @Autowired
-    public ItemController(ItemService itemService) {
+    public ItemController(@Qualifier("ItemService") ItemServiceImpl itemService) {
         this.itemService = itemService;
     }
 

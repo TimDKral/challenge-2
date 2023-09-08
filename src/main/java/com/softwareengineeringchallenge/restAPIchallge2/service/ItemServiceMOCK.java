@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Qualifier;
+
 
 @Service
-
+@Primary
 @Qualifier("ItemService")
-public class ItemService implements ItemServiceImpl {
+public class ItemServiceMOCK implements ItemServiceImpl {
 
     // ERROR: Item not found
     private static final String ITEM_NOT_FOUND_MESSAGE = "Item not found";
@@ -25,13 +25,16 @@ public class ItemService implements ItemServiceImpl {
     private final ItemAdapter itemAdapter;
 
     @Autowired
-    public ItemService(@Qualifier("ItemRepository") ItemRepository itemRepository, ItemAdapter itemAdapter) {
+    public ItemServiceMOCK(@Qualifier("ItemRepositoryMock") ItemRepository itemRepository, ItemAdapter itemAdapter) {
         this.itemRepository = itemRepository;
         this.itemAdapter = itemAdapter;
     }
 
     public ItemDto createItem(ItemDto itemDto) {
         Item item = itemAdapter.dtoToEntity(itemDto);
+        item.setDescription(item.getDescription().toUpperCase());
+        item.setName(item.getName().toUpperCase());
+
         item = itemRepository.save(item);
         return itemAdapter.entityToDto(item);
     }
